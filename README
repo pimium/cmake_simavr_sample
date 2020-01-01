@@ -1,4 +1,4 @@
-This project build a sample project from simavr with cmake:
+This project builds a sample project from simavr with cmake:
 
 mkdir build
 cd build
