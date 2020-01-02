@@ -1,10 +1,16 @@
+#cmake_simavr_sample
+
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
 This project builds a sample project from simavr with cmake:
 
-mkdir build
-cd build
-cmake ..
-make
-./pc/ledramp-x86_64-linux-gnu.exe avr/ledramp-atmega168p.elf
+```sh
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+$ ./pc/ledramp-x86_64-linux-gnu.exe avr/ledramp-atmega168p.elf
+```
 
 This contains a sample program to demonstrate the use of simavr
 using 'custom' code, and own "peripherals". It shows how it is
