@@ -1,7 +1,8 @@
 
 cmake_minimum_required(VERSION 2.8)
 
-set(exe_file ${PROJECT_NAME}-x86_64-linux-gnu.exe)
+set(exe_file "${PROJECT_NAME}-x86_64-linux-gnu.exe")
+set(avr_file "avr/${PROJECT_NAME}-${AVR_MCU}.elf")
 
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_C_COMPILER clang)
@@ -36,6 +37,27 @@ set_target_properties(
       PROPERTIES
         COMPILE_FLAGS "--std=gnu99 -Wall -MMD"
         LINK_FLAGS "-lGL -lGLU -lglut -lpthread -lsimavr -lm -lelf"
-) 
+)
 
 target_link_libraries(${exe_file} cores parts)
+
+
+add_custom_command(
+        OUTPUT simulation
+        COMMAND ${exe_file} "avr/${PROJECT_NAME}-${AVR_MCU}.elf"
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        DEPENDS ${avr_file}
+)
+
+add_custom_target(
+        run_simulation
+        ALL
+        WORKING_DIRECTORY CMAKE_BINARY_DIR
+        DEPENDS simulation
+)
+
+set_target_properties(
+        run_simulation
+        PROPERTIES
+        OUTPUT_NAME run_simulation
+)
