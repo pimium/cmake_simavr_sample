@@ -164,10 +164,10 @@ int main(int argc, char *argv[]) {
   button_init(avr, &button, "button");
   // "connect" the output irw of the button to the port pin of the AVR
   avr_connect_irq(button.irq + IRQ_BUTTON_OUT,
-                  avr_io_getirq(avr, AVR_IOCTL_IOPORT_GETIRQ('B'), 3));
+                  avr_io_getirq(avr, AVR_IOCTL_IOPORT_GETIRQ('C'), 0));
 
   // connect all the pins on port B to our callback
-  for (int i = 0; i < 3; i++)
+  for (int i = 0; i < 8; i++)
     avr_irq_register_notify(avr_io_getirq(avr, AVR_IOCTL_IOPORT_GETIRQ('B'), i),
                             pin_changed_hook, NULL);
 
@@ -188,7 +188,7 @@ int main(int argc, char *argv[]) {
   avr_vcd_init(avr, "gtkwave_output.vcd", &vcd_file, 100000 /* usec */);
   avr_vcd_add_signal(&vcd_file, avr_io_getirq(avr, AVR_IOCTL_IOPORT_GETIRQ('B'),
                                               IOPORT_IRQ_PIN_ALL),
-                     3 /* bits */, "portb");
+                     8 /* bits */, "portb");
   avr_vcd_add_signal(&vcd_file, button.irq + IRQ_BUTTON_OUT, 1 /* bits */,
                      "button");
 
