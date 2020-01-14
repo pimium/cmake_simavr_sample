@@ -155,7 +155,7 @@ include_directories(
 
 add_avr_executable(
   ${PROJECT_NAME}
-  atmega168_ledramp.c
+  ledramp_avr.c
 )
 
 ##########################################################################
