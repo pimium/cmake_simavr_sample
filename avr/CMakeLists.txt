@@ -114,8 +114,8 @@ if(CMAKE_BUILD_TYPE MATCHES RelWithDebInfo)
 endif(CMAKE_BUILD_TYPE MATCHES RelWithDebInfo)
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)
-   set(CMAKE_C_FLAGS_DEBUG "-Os -save-temps -g -gdwarf-2 -gstrict-dwarf -mmcu=${AVR_MCU} -fno-inline-small-functions -ffunction-sections -fdata-sections -Wl,--relax,--gc-sections -Wl,--undefined=_mmcu,--section-start=.mmcu=0x910000")
-   set(CMAKE_CXX_FLAGS_DEBUG "-Os -save-temps -g -gdwarf-2 -gstrict-dwarf")
+   set(CMAKE_C_FLAGS_DEBUG "-O0 -save-temps -g -gdwarf-2 -gstrict-dwarf -mmcu=${AVR_MCU} -fno-inline-small-functions -ffunction-sections -fdata-sections -Wl,--relax,--gc-sections -Wl,--undefined=_mmcu,--section-start=.mmcu=0x910000")
+   set(CMAKE_CXX_FLAGS_DEBUG "-O0 -save-temps -g -gdwarf-2 -gstrict-dwarf")
 endif(CMAKE_BUILD_TYPE MATCHES Debug)
 
 
