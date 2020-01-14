@@ -20,8 +20,7 @@
 # tools to beused for programming the AVR
 ##########################################################################
 set(AVR_UPLOADTOOL avrdude)
-#set(AVR_PROGRAMMER avrispmkII)
-set(AVR_PROGRAMMER usbasp)
+set(AVR_PROGRAMMER avrispmkII)
 set(AVR_UPLOADTOOL_PORT usb)
 
 ##########################################################################
@@ -36,7 +35,7 @@ set(AVR_L_FUSE 0xc3)
 # Intentionally left blank, due to a different approach of using the
 # toolchain file via -DCMAKE_TOOLCHAIN_FILE=path/to/generic-gcc-avr.cmake
 # at the cmake command line call
-#
+# 
 include(./generic-gcc-avr.cmake)
 
 ##########################################################################
@@ -58,6 +57,7 @@ message(STATUS "Current L_FUSE is set to: ${AVR_L_FUSE}")
 ##########################################################################
 # set build type
 ##########################################################################
+set(CMAKE_BUILD_TYPE Debug)
 
 if(NOT CMAKE_BUILD_TYPE)
    set(CMAKE_BUILD_TYPE Release)
@@ -66,7 +66,7 @@ endif(NOT CMAKE_BUILD_TYPE)
 ##########################################################################
 # needs to be defined for AVR toolchain
 ##########################################################################
-set(MCU_SPEED "8000000UL")
+set(MCU_SPEED "4000000UL")
 
 ##########################################################################
 # some cmake cross-compile necessities
@@ -104,8 +104,8 @@ message(STATUS "Set CMAKE_SYSTEM_LIBRARY_PATH to ${CMAKE_SYSTEM_LIBRARY_PATH}")
 # set compiler options for build types
 ##########################################################################
 if(CMAKE_BUILD_TYPE MATCHES Release)
-   set(CMAKE_C_FLAGS_RELEASE "-O3")
-   set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+   set(CMAKE_C_FLAGS_RELEASE "-Os")
+   set(CMAKE_CXX_FLAGS_RELEASE "-Os")
 endif(CMAKE_BUILD_TYPE MATCHES Release)
 
 if(CMAKE_BUILD_TYPE MATCHES RelWithDebInfo)
@@ -121,7 +121,6 @@ endif(CMAKE_BUILD_TYPE MATCHES Debug)
 
 set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "")
 set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "")
-
 ##########################################################################
 # compiler options for all build types
 ##########################################################################
