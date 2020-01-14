@@ -151,7 +151,6 @@ else(WITH_MCU)
     set(MCU_TYPE_FOR_FILENAME "")
 endif(WITH_MCU)
 
-
 ##########################################################################
 # add_avr_executable
 # - IN_VAR: EXECUTABLE_NAME
@@ -181,7 +180,7 @@ function(add_avr_executable EXECUTABLE_NAME)
       ${elf_file}
       PROPERTIES
          COMPILE_FLAGS "-mmcu=${AVR_MCU}"
-         LINK_FLAGS "-mmcu=${AVR_MCU} -Wl,--gc-sections -mrelax -Wl,-u,vfprintf -lprintf_min -Wl,-Map,${map_file}"
+         LINK_FLAGS "-mmcu=${AVR_MCU} -Wl,--gc-sections -mrelax -Wl,-Map,${map_file}"
    )
 
    add_custom_command(
@@ -403,4 +402,3 @@ function(avr_generate_fixed_targets)
          COMMENT "Program calibration status of internal oscillator from ${AVR_MCU}_calib.hex."
    )
 endfunction()
-

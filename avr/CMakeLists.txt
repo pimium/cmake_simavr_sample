@@ -145,7 +145,7 @@ add_definitions("-std=gnu99")
 include_directories(
   /usr/local/include/simavr/
   /usr/local/include/simavr/avr/
-  )
+)
 
 ##########################################################################
 # building library and application in their subdirectories

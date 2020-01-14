@@ -82,7 +82,7 @@ void displayCB(void) /* function called whenever redisplay needed */
 
   glEnd();
   glutSwapBuffers();
-  // glFlush();				/* Complete any pending operations */
+  // glFlush();       /* Complete any pending operations */
 }
 
 void keyCB(unsigned char key, int x, int y) /* called on key press */
@@ -146,8 +146,8 @@ int main(int argc, char *argv[]) {
     fname = argv[1];
   }
 
-  //	sprintf(path, "%s/%s", dirname(argv[0]), fname);
-  //	printf("Firmware pathname is %s\n", path);
+  //  sprintf(path, "%s/%s", dirname(argv[0]), fname);
+  //  printf("Firmware pathname is %s\n", path);
   elf_read_firmware(fname, &f);
 
   printf("firmware %s f=%d mmcu=%s\n", fname, (int)f.frequency, f.mmcu);
@@ -164,10 +164,10 @@ int main(int argc, char *argv[]) {
   button_init(avr, &button, "button");
   // "connect" the output irw of the button to the port pin of the AVR
   avr_connect_irq(button.irq + IRQ_BUTTON_OUT,
-                  avr_io_getirq(avr, AVR_IOCTL_IOPORT_GETIRQ('C'), 0));
+                  avr_io_getirq(avr, AVR_IOCTL_IOPORT_GETIRQ('B'), 3));
 
   // connect all the pins on port B to our callback
-  for (int i = 0; i < 8; i++)
+  for (int i = 0; i < 3; i++)
     avr_irq_register_notify(avr_io_getirq(avr, AVR_IOCTL_IOPORT_GETIRQ('B'), i),
                             pin_changed_hook, NULL);
 
@@ -179,16 +179,16 @@ int main(int argc, char *argv[]) {
   }
 
   /*
-   *	VCD file initialization
+   *  VCD file initialization
    *
-   *	This will allow you to create a "wave" file and display it in gtkwave
-   *	Pressing "r" and "s" during the demo will start and stop recording
-   *	the pin changes
+   *  This will allow you to create a "wave" file and display it in gtkwave
+   *  Pressing "r" and "s" during the demo will start and stop recording
+   *  the pin changes
    */
   avr_vcd_init(avr, "gtkwave_output.vcd", &vcd_file, 100000 /* usec */);
   avr_vcd_add_signal(&vcd_file, avr_io_getirq(avr, AVR_IOCTL_IOPORT_GETIRQ('B'),
                                               IOPORT_IRQ_PIN_ALL),
-                     8 /* bits */, "portb");
+                     3 /* bits */, "portb");
   avr_vcd_add_signal(&vcd_file, button.irq + IRQ_BUTTON_OUT, 1 /* bits */,
                      "button");
 
