@@ -6,8 +6,12 @@
 // for linker, emulator, and programmer's sake
 #include "avr_mcu_section.h"
 
+// #ifndef MCU
+// #define MCU "attiny13"
+// #endif
+
 #ifndef MCU
-#define MCU "attiny13"
+#define MCU attiny13
 #endif
 
 AVR_MCU(F_CPU, MCU);
@@ -19,7 +23,7 @@ ISR(TIM0_COMPA_vect) // handler for Output Compare 1 overflow interrupt
   tickCount++;
 }
 
-void tick_init() {
+void tick_init(void) {
   TCCR0A = (1 << WGM01);
   // use CLK/8 prescale value, clear timer/counter on compareA match
   TCCR0B = (1 << CS00) | (0 << CS01) | (1 << CS02);
@@ -30,9 +34,7 @@ void tick_init() {
 
 volatile uint8_t pressed = 0;
 
-ISR(PCINT0_vect) {
-  pressed = (PINB & (1 << PB3)) ? 0 : 1;
-}
+ISR(PCINT0_vect) { pressed = (PINB & (1 << PB3)) ? 0 : 1; }
 
 int main() {
   DDRB = 0xf7; // all PORT B output
