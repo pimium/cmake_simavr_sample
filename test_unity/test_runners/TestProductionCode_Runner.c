@@ -66,7 +66,7 @@ int main(void)
 {
   suite_setup();
   UnityBegin("/home/pimi/projects/cmake_simavr_sample/test_unity/TestProductionCode.c");
-  RUN_TEST(test_tick_init, 23);
+  RUN_TEST(test_tick_init, 20);
 
   return suite_teardown(UnityEnd());
 }
